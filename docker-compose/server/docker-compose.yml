@@ -1,0 +1,23 @@
+version: "2.4"
+
+services:
+  tinyfecVPN:
+    cap_add:
+      - NET_ADMIN
+    command: >-
+      -s
+      -l 0.0.0.0:4096
+      -k ${PASSWORD}
+    container_name: tinyfecVPN
+    expose:
+      - 4096/udp
+    image: suieu/tinyfecvpn
+    networks:
+      - tinyfecVPN
+    restart: always
+    sysctls:
+      net.ipv4.ip_forward: 1
+
+networks:
+  tinyfecVPN:
+    name: tinyfecVPN
